@@ -68,7 +68,9 @@ public class Yolo_project {
             try (Scanner sc = new Scanner(file)) {
                 while (sc.hasNextLine()) {
                     String i = sc.nextLine();
-                    line_counter++;
+					if(i.contains("FPS")){
+						line_counter++;
+					}
                     if (flag && !i.contains("%")) {
                         System.out.println(i + " " + line_counter);
                         String[] str = i.split(" ");
