@@ -1,5 +1,3 @@
-package yolo_project;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -49,7 +47,11 @@ public class Yolo_project {
         b.left = b_new.left;
         b.vector = b_new.vector;
     }
-
+    //wywołanie z numerem klatki
+    //dla przypadków skrajnych dobrać algorytm
+    //w analizie problemu dać pseudokod
+    //uszczegółowić przypadki urzycia o algorytm
+    //nagrać własny film
     public void newBus(Bus b_new) {
         for (Bus b : c_buses) {
             // Czy to jest ten sam bus ?

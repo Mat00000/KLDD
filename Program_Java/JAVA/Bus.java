@@ -1,16 +1,10 @@
-package yolo_project;
-
-/**
- *
- * @author jakub
- */
 public class Bus {
 
     int left, right, top, bottom;
     point center;
     double vector;
     int life_time;
-    //Construktor klasy bus 
+    //Construktor klasy bus
     public Bus(int left, int top, int right, int bottom, int life_time) {
         this.left = left;
         this.right = right;
@@ -23,7 +17,7 @@ public class Bus {
     }
     // Nadaje środek bounding box'a busa
     public final point center() {
-        System.out.println("Środek x=" + (right + left) / 2 + " y=" + (bottom + top) / 2);
+        //System.out.println("Środek x=" + (right + left) / 2 + " y=" + (bottom + top) / 2);
         return new point((right + left) / 2, (bottom + top) / 2);
 
     }

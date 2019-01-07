@@ -1,9 +1,3 @@
-package yolo_project;
-
-/**
- *
- * @author jakub
- */
 public class point {
 
     int x;
