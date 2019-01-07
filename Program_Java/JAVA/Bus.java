@@ -1,16 +1,18 @@
 public class Bus {
 
     int left, right, top, bottom;
+    int direction;      // -1 from L to R, 0 - standing (started value), 1 - from R to L
     point center;
     double vector;
     int life_time;
     //Construktor klasy bus
-    public Bus(int left, int top, int right, int bottom, int life_time) {
+    public Bus(int left, int top, int right, int bottom, int life_time, int direction) {
         this.left = left;
         this.right = right;
         this.top = top;
         this.bottom = bottom;
         this.life_time = life_time;
+        this.direction = direction;
         center = center();
         vector = vector();
 

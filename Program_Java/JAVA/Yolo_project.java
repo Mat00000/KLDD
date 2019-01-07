@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Jakub Duda
+ * @author Jakub Duda, Mateusz Laskowski
  *
  */
 public class Yolo_project {
@@ -25,6 +25,16 @@ public class Yolo_project {
             i++;
             //System.out.println("Bus "+i);
             System.out.println("LT "+b.life_time);
+            switch(b.direction) {
+                case -1:    System.out.println("Direction: L -> R");
+                    break;
+                case 0:     System.out.println("Direction: S");
+                    break;
+                case 1:     System.out.println("Direction: R -> L");
+                    break;
+                default:    System.out.println("Direction: undefinded");
+                    break;
+            }
         }
         System.out.println("Bus "+i);
     }
@@ -46,6 +56,17 @@ public class Yolo_project {
         b.bottom = b_new.bottom;
         b.left = b_new.left;
         b.vector = b_new.vector;
+        b.direction = b_new.direction;
+    }
+
+    public int checkDirection(Bus b_new, Bus b) {
+        // System.out.println("OLD " + b.vector);
+        // System.out.println("NEW " + b_new.vector);
+        if(b.direction != 0) return b.direction;    // jeżeli miał już kierunek to uznaje że nie zawróci
+        
+        if(b.vector == b_new.vector) return 0;
+        else if(b.vector < b_new.vector) return -1;
+        else return 1;
     }
     //wywołanie z numerem klatki
     //dla przypadków skrajnych dobrać algorytm
@@ -56,6 +77,7 @@ public class Yolo_project {
         for (Bus b : c_buses) {
             // Czy to jest ten sam bus ?
             if (compareBus(b_new, b)) {
+                b_new.direction = checkDirection(b_new, b);
                 copyBus(b_new,b);
                 //b = b_new;              //aktualizacja danych o busie
                 //System.out.println("Ten sam bus");
@@ -81,6 +103,7 @@ public class Yolo_project {
         File file = new File("mpk_output");///home/jakub/darknet/mpk
         try {
             int line_counter = 0;//licznik klatek
+            int undefinded_direction = 0;   // 0 - standing
             try (Scanner sc = new Scanner(file)) {
                 while (sc.hasNextLine()) {
                     String i = sc.nextLine();
@@ -93,7 +116,7 @@ public class Yolo_project {
                         String[] str = i.split(" ");
                         //Tworzy busa
                         Bus b = new Bus(Integer.parseInt(str[0]), Integer.parseInt(str[1]),
-                                Integer.parseInt(str[2]), Integer.parseInt(str[3]), line_counter);
+                                Integer.parseInt(str[2]), Integer.parseInt(str[3]), line_counter, undefinded_direction);
                         // Jeśli nie ma obecnie w pamieci żadnych busów dodaje busa
                         if (c_buses.isEmpty()) {
                             c_buses.add(b);
