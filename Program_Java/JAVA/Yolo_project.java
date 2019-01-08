@@ -83,7 +83,7 @@ public class Yolo_project {
                 //System.out.println("Ten sam bus");
                 return;
             }
-            // Jeśli bus w pamięci był ostatnio aktualizoawny później niż bus_lifetime
+            // Jeśli bus w pamięci był ostatnio aktualizoawny później niż bus_lifetime
             if (b_new.life_time - b.life_time > bus_lifetime) {
                 buses.add(b);
                 r_buses.add(b);
