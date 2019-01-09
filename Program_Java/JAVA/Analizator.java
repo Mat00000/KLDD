@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author Jakub Duda, Mateusz Laskowski
  *
  */
-public class Yolo_project {
+public class Analizator {
 
     int delta = 20;  //odległość miedzy środkami
     int bus_lifetime = 50; // czas życia busa
@@ -18,7 +18,7 @@ public class Yolo_project {
     boolean flag = false;
 
     public static void main(String[] args) {
-        Yolo_project yolo = new Yolo_project();
+        Analizator yolo = new Analizator();
         yolo.input();
         int i = 0;
         for (Bus b : yolo.buses) {
