@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Analizator {
 
-    int delta = 20;  //odległość miedzy środkami
+    int delta = 36;  //odległość miedzy środkami
     int bus_lifetime = 50; // czas życia busa
     ArrayList<Bus> c_buses = new ArrayList<>(); //Busy w pamięci/ pamięta tylko poprzednią klatke
     ArrayList<Bus> buses = new ArrayList<>();   //Busy które przejechały (zliczone)
@@ -62,7 +62,7 @@ public class Analizator {
     public int checkDirection(Bus b_new, Bus b) {
         // System.out.println("OLD " + b.vector);
         // System.out.println("NEW " + b_new.vector);
-        if(b.direction != 0) return b.direction;    // jeżeli miał już kierunek to uznaje że nie zawróci
+        // if(b.direction != 0) return b.direction;    // jeżeli miał już kierunek to uznaje że nie zawróci
         
         if(b.vector == b_new.vector) return 0;
         else if(b.vector < b_new.vector) return -1;
