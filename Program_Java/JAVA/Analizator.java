@@ -100,7 +100,7 @@ public class Analizator {
 
     //Parser danych z pliku
     public void input() {
-        File file = new File("mpk_test_output");///home/jakub/darknet/mpk
+        File file = new File("mpk_output");///home/jakub/darknet/mpk
         try {
             int line_counter = 0;//licznik klatek
             int undefinded_direction = 0;   // 0 - standing
