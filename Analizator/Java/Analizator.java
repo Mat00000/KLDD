@@ -1,7 +1,10 @@
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,26 +22,39 @@ public class Analizator {
     ArrayList<Bus> r_buses = new ArrayList<>(); // Busy do usunięcia
     boolean flag = false;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Analizator yolo = new Analizator();
         yolo.input();
         int i = 0;
+        String temp;
+        BufferedWriter writer = new BufferedWriter(new FileWriter("outputAnalizator.txt"));
         for (Bus b : yolo.buses) {
             i++;
             //System.out.println("Bus "+i);
-            System.out.println("LT "+b.life_time);
+            System.out.println("LT "+ b.life_time);
+            temp = "LT " + b.life_time + "\n";
+            writer.write(temp);
             switch(b.direction) {
                 case -1:    System.out.println("Direction: L -> R");
+                            temp = "Direction: L -> R\n";
                     break;
                 case 0:     System.out.println("Direction: S");
+                            temp = "Direction: S\n";
                     break;
                 case 1:     System.out.println("Direction: R -> L");
+                            temp = "Direction: R -> L\n";
                     break;
                 default:    System.out.println("Direction: undefinded");
+                            temp = "Direction: undefinded\n";
                     break;
             }
+            writer.write(temp);
         }
         System.out.println("Bus "+i);
+        temp = "Bus " + i;
+        writer.write(temp);
+
+        writer.close();
     }
 
     // Metoda zwraca wynik czy dany bus_new jest tym samym busem

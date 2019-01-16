@@ -1,0 +1,11 @@
+LT 14
+Direction: L -> R
+LT 198
+Direction: L -> R
+LT 384
+Direction: L -> R
+LT 611
+Direction: R -> L
+LT 750
+Direction: R -> L
+Bus 5
