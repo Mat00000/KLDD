@@ -1,6 +1,6 @@
 public class Bus {
 
-    int left, right, top, bottom;
+    int left, right, top, bottom, surface, lastFrame;
     int direction;      // -1 from L to R, 0 - standing (started value), 1 - from R to L
     point center;
     double vector;
@@ -13,6 +13,8 @@ public class Bus {
         this.bottom = bottom;
         this.life_time = life_time;
         this.direction = direction;
+        this.surface = (right - left)*(bottom - top);
+        this.lastFrame = life_time;
         center = center();
         vector = vector();
 
