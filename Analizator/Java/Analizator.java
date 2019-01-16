@@ -1,3 +1,5 @@
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -5,13 +7,13 @@ import java.util.Scanner;
 
 /**
  *
- * @author Jakub Duda, Mateusz Laskowski
+ * @author Jakub Duda, Mateusz Laskowski, Pjoter, Mikis
  *
  */
 public class Analizator {
 
     int delta = 36;  //odległość miedzy środkami
-    int bus_lifetime = 50; // czas życia busa
+    int bus_lifetime = 80; // czas życia busa
     ArrayList<Bus> c_buses = new ArrayList<>(); //Busy w pamięci/ pamięta tylko poprzednią klatke
     ArrayList<Bus> buses = new ArrayList<>();   //Busy które przejechały (zliczone)
     ArrayList<Bus> r_buses = new ArrayList<>(); // Busy do usunięcia
@@ -48,6 +50,19 @@ public class Analizator {
         return (d < delta);
     }
 
+    public boolean overlapFileter(Bus b_new, Bus b){//true gdy się nakłada
+        //sprawdzenie przypadku nakładania sie obiektów
+        if(b.life_time==b_new.life_time){
+            //b to ten wiekszy
+            if((b.top<=b_new.top) && (b.bottom>=b_new.bottom) && (b.left<=b_new.left)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
     public void copyBus(Bus b_new, Bus b){
         b.center = b_new.center;
         b.life_time = b_new.life_time;
@@ -57,6 +72,8 @@ public class Analizator {
         b.left = b_new.left;
         b.vector = b_new.vector;
         b.direction = b_new.direction;
+        b.surface = b_new.surface;
+        b.lastFrame = b_new.lastFrame;
     }
 
     public int checkDirection(Bus b_new, Bus b) {
@@ -76,7 +93,12 @@ public class Analizator {
     public void newBus(Bus b_new) {
         for (Bus b : c_buses) {
             // Czy to jest ten sam bus ?
-            if (compareBus(b_new, b)) {
+            if(overlapFileter(b_new,b)){
+                if(b.surface<b_new.surface){
+                    copyBus(b_new,b);
+                }
+            }
+            else if (compareBus(b_new, b)) {
                 b_new.direction = checkDirection(b_new, b);
                 copyBus(b_new,b);
                 //b = b_new;              //aktualizacja danych o busie
@@ -132,6 +154,9 @@ public class Analizator {
                         //System.out.println(i);
                         flag = true;
                     }
+                }
+                for (Bus b : c_buses) {
+                    buses.add(b);
                 }
             }
         } catch (FileNotFoundException e) {
